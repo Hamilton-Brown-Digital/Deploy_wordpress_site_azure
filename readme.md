@@ -43,7 +43,7 @@ Click the button below to deploy a new WordPress instance.
 This will:
 - Create a new Azure Web App, linking it to the existing App Service Plan. The database details will be set as Application Settings. The code will be pulled from the [Six Degrees Azure WordPress repo](https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL).
 
-<a href="https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json " target="_blank">
   <img src="https://aka.ms/deploytoazurebutton"/>
 </a>
 
@@ -53,4 +53,10 @@ This will:
 $url = "https://raw.githubusercontent.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/main/arm/template.json"
 [uri]::EscapeDataString($url)
 
-https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json -->
+https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json 
+
+https://github.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/blob/main/https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json
+
+https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json 
+
+-->
