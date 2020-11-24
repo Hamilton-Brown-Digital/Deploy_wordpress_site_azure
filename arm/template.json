@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "websitename": {
+        "websiteName": {
             "type": "string",
             "metadata": {
                 "description": "The name of the WordPress app you would like to deploy"
@@ -26,7 +26,7 @@
                 "description": "The password of the (existing) MySQL user"
             }
         },
-        "mysqlHost": {
+        "mySqlHost": {
             "type": "string",
             "metadata": {
                 "description": "The name of the (existing) MySQL host. Just the reource name, not the FQDN."
@@ -60,12 +60,12 @@
         }
     },
     "variables": {
-        "endpointName": "[concat('cdn-endpoint-', parameters('websitename'))]",
-        "profileName": "[concat('cdn-profile-', parameters('websitename'))]"
+        "endpointName": "[concat('cdn-endpoint-', parameters('websiteName'))]",
+        "profileName": "[concat('cdn-profile-', parameters('websiteName'))]"
     },
     "resources": [
         {
-            "name": "[parameters('websitename')]",
+            "name": "[parameters('websiteName')]",
             "apiVersion": "2018-11-01",
             "location": "[resourceGroup().location]",
             "kind": "app,linux",
@@ -75,7 +75,7 @@
                     "connectionStrings": [
                         {
                             "name": "defaultConnection",
-                            "ConnectionString": "[concat('Database=', parameters('databaseName'), ';Data Source=', parameters('mysqlHost') ,'.mysql.database.azure.com;User Id=',parameters('databaseUser'),'@',parameters('mysqlHost') ,';Password=',parameters('databaseUserPassword'))]",
+                            "ConnectionString": "[concat('Database=', parameters('databaseName'), ';Data Source=', parameters('mySqlHost') ,'.mysql.database.azure.com;User Id=',parameters('databaseUser'),'@',parameters('mySqlHost') ,';Password=',parameters('databaseUserPassword'))]",
                             "type": "MySQL"
                         }
                     ],
@@ -86,7 +86,7 @@
                         },
                         {
                             "name": "DATABASE_HOST",
-                            "value": "[concat(parameters('mysqlHost') ,'.mysql.database.azure.com')]"
+                            "value": "[concat(parameters('mySqlHost') ,'.mysql.database.azure.com')]"
                         },
                         {
                             "name": "DATABASE_NAME",
@@ -98,7 +98,7 @@
                         },
                         {
                             "name": "DATABASE_USERNAME",
-                            "value": "[concat(parameters('databaseUser'),'@',parameters('mysqlHost'))]"
+                            "value": "[concat(parameters('databaseUser'),'@',parameters('mySqlHost'))]"
                         }
                     ]
                 },
@@ -125,7 +125,7 @@
                         "IsManualIntegration": true
                     },
                     "dependsOn": [
-                        "[resourceId('Microsoft.Web/Sites', parameters('websitename'))]"
+                        "[resourceId('Microsoft.Web/Sites', parameters('websiteName'))]"
                     ]
                 }
             ]
@@ -133,10 +133,10 @@
         {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2018-11-01",
-            "name": "[concat(parameters('websitename'), '/web')]",
+            "name": "[concat(parameters('websiteName'), '/web')]",
             "location": "UK South",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('websitename'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('websiteName'))]"
             ],
             "properties": {
                 "netFrameworkVersion": "v4.0",
@@ -205,11 +205,11 @@
                     "apiVersion": "2020-04-15",
                     "dependsOn": [
                         "[variables('profileName')]",
-                        "[parameters('websitename')]"
+                        "[parameters('websiteName')]"
                     ],
 
                     "properties": {
-                        "originHostHeader": "[reference(parameters('websitename')).hostNames[0]]",
+                        "originHostHeader": "[reference(parameters('websiteName')).hostNames[0]]",
                         "isHttpAllowed": true,
                         "isHttpsAllowed": true,
                         "queryStringCachingBehavior": "IgnoreQueryString",
@@ -231,7 +231,7 @@
                             {
                                 "name": "origin1",
                                 "properties": {
-                                    "hostName": "[reference(parameters('websitename')).hostNames[0]]"
+                                    "hostName": "[reference(parameters('websiteName')).hostNames[0]]"
                                 }
                             }
                         ]
@@ -243,7 +243,7 @@
     "outputs": {
         "Web App Name": {
             "type": "string",
-            "value": "[reference(parameters('websitename')).hostNames[0]]"
+            "value": "[reference(parameters('websiteName')).hostNames[0]]"
         },
         "CDN Profile Name": {
             "type": "string",

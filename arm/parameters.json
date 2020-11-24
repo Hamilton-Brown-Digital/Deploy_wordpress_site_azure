@@ -2,6 +2,27 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "websitename": {
+            "value": "danmcloughlinwpdemo2020-02"
+        },
+        "databaseName": {
+            "value": null
+        },
+        "databaseUser": {
+            "value": null
+        },
+        "databaseUserPassword": {
+            "value": null
+        },
+        "mysqlHost": {
+            "value": null
+        },
+        "appServicePlan": {
+            "value": null
+        },
+        "appServicePlanResourceGroup": {
+            "value": null
+        },
         "repoUrl": {
             "value": "https://github.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/tree/main/wordpress"
         },
