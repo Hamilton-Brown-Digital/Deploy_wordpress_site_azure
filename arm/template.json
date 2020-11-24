@@ -1,0 +1,259 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "websitename": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the WordPress app you would like to deploy"
+            }
+        },
+        "databaseName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the (existing) MySQL database"
+            }
+        },
+        "mysqlHost": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the (existing) MySQL host. Just the reource name, not the FQDN."
+            }
+        },
+        "databaseUser": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the (existing) MySQL user"
+            }
+        },
+        "databaseUserPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The password of the (existing) MySQL user"
+            }
+        },
+        "appServicePlan": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the (existing) App Service Plan (Linux)"
+            }
+        },
+        "appServicePlanResourceGroup": {
+            "type": "string",
+            "metadata": {
+                "description": "The resource group name of the (existing) App Service Plan (Linux)"
+            }
+        },
+        "subscriptionId": {
+            "type": "string",
+            "metadata": {
+                "description": "The subscription ID to deploy into"
+            }
+        },
+        "repoUrl": {
+            "type": "string",
+            "metadata": {
+                "description": "The GitHub repo name of the codebase to install onto the Web App"
+            },
+            "defaultValue": "https://github.com/sixdegreesazure/Six-Degrees-Azure-WordPress"
+        },
+        "branch": {
+            "type": "string",
+            "metadata": {
+                "description": "The GitHub branch for the above repo"
+            },
+            "defaultValue": "main"
+        }
+    },
+    "variables": {
+        "endpointName": "[concat('cdn-endpoint-', parameters('websitename'))]",
+        "profileName": "[concat('cdn-profile-', parameters('websitename'))]"
+    },
+    "resources": [
+        {
+            "name": "[parameters('websitename')]",
+            "apiVersion": "2018-11-01",
+            "location": "[resourceGroup().location]",
+            "kind": "app,linux",
+            "type": "Microsoft.Web/sites",
+            "properties": {
+                "siteConfig": {
+                    "connectionStrings": [
+                        {
+                            "name": "defaultConnection",
+                            "ConnectionString": "[concat('Database=', parameters('databaseName'), ';Data Source=', parameters('mysqlHost') ,'.mysql.database.azure.com;User Id=',parameters('databaseUser'),'@',parameters('mysqlHost') ,';Password=',parameters('databaseUserPassword'))]",
+                            "type": "MySQL"
+                        }
+                    ],
+                    "appSettings": [
+                        {
+                            "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                            "value": "true"
+                        },
+                        {
+                            "name": "DATABASE_HOST",
+                            "value": "[concat(parameters('mysqlHost') ,'.mysql.database.azure.com')]"
+                        },
+                        {
+                            "name": "DATABASE_NAME",
+                            "value": "[parameters('databaseName')]"
+                        },
+                        {
+                            "name": "DATABASE_PASSWORD",
+                            "value": "[parameters('databaseUserPassword')]"
+                        },
+                        {
+                            "name": "DATABASE_USERNAME",
+                            "value": "[concat(parameters('databaseUser'),'@',parameters('mysqlHost'))]"
+                        }
+                    ]
+                },
+                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('appServicePlanResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlan'))]",
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None"
+            },
+            "resources": [
+                {
+                    "type": "sourcecontrols",
+                    "name": "web",
+                    "apiVersion": "2020-06-01",
+                    "properties": {
+                        "RepoUrl": "[parameters('repoUrl')]",
+                        "branch": "[parameters('branch')]",
+                        "IsManualIntegration": true
+                    },
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', parameters('websitename'))]"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('websitename'), '/web')]",
+            "location": "UK South",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('websitename'))]"
+            ],
+            "properties": {
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "7.4",
+                "linuxFxVersion": "PHP|7.4",
+                "scmType": "ExternalGit",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": true,
+                "minTlsVersion": "1.2",
+                "ftpsState": "ftpsonly",
+                "reservedInstanceCount": 0
+            }
+        },
+        {
+            "name": "[variables('profileName')]",
+            "type": "Microsoft.Cdn/profiles",
+            "location": "global",
+            "apiVersion": "2020-04-15",
+            "tags": {
+                "displayName": "[variables('profileName')]"
+            },
+            "sku": {
+                "name": "Standard_Akamai"
+            },
+            "properties": {},
+            "resources": [
+                {
+                    "name": "[variables('endpointName')]",
+                    "type": "endpoints",
+                    "location": "global",
+                    "apiVersion": "2020-04-15",
+                    "dependsOn": [
+                        "[variables('profileName')]",
+                        "[parameters('websitename')]"
+                    ],
+
+                    "properties": {
+                        "originHostHeader": "[reference(parameters('websitename')).hostNames[0]]",
+                        "isHttpAllowed": true,
+                        "isHttpsAllowed": true,
+                        "queryStringCachingBehavior": "IgnoreQueryString",
+                        "contentTypesToCompress": [
+                            "text/plain",
+                            "text/html",
+                            "text/css",
+                            "application/x-javascript",
+                            "text/javascript",
+                            "image/png",
+                            "image/svg+xml",
+                            "image/tiff",
+                            "image/webp",
+                            "image/jpg",
+                            "image/jpeg"
+                        ],
+                        "isCompressionEnabled": true,
+                        "origins": [
+                            {
+                                "name": "origin1",
+                                "properties": {
+                                    "hostName": "[reference(parameters('websitename')).hostNames[0]]"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "outputs": {
+        "Web App Name": {
+            "type": "string",
+            "value": "[reference(parameters('websitename')).hostNames[0]]"
+        },
+        "CDN Profile Name": {
+            "type": "string",
+            "value": "[reference(variables('endpointName')).hostName]"
+        }
+    }
+}
