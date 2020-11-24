@@ -55,7 +55,7 @@
             "metadata": {
                 "description": "The GitHub repo name of the codebase to install onto the Web App"
             },
-            "defaultValue": "https://github.com/sixdegreesazure/Six-Degrees-Azure-WordPress"
+            "defaultValue": "https://github.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/tree/main/wordpress"
         },
         "branch": {
             "type": "string",

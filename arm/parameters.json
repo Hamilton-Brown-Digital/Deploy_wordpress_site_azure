@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "repoUrl": {
-            "value": "https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL"
+            "value": "https://github.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/tree/main/wordpress"
         },
         "branch": {
             "value": "main"
