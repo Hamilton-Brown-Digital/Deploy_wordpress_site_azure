@@ -14,12 +14,6 @@
                 "description": "The name of the (existing) MySQL database"
             }
         },
-        "mysqlHost": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the (existing) MySQL host. Just the reource name, not the FQDN."
-            }
-        },
         "databaseUser": {
             "type": "string",
             "metadata": {
@@ -32,6 +26,12 @@
                 "description": "The password of the (existing) MySQL user"
             }
         },
+        "mysqlHost": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the (existing) MySQL host. Just the reource name, not the FQDN."
+            }
+        },
         "appServicePlan": {
             "type": "string",
             "metadata": {
@@ -42,12 +42,6 @@
             "type": "string",
             "metadata": {
                 "description": "The resource group name of the (existing) App Service Plan (Linux)"
-            }
-        },
-        "subscriptionId": {
-            "type": "string",
-            "metadata": {
-                "description": "The subscription ID to deploy into"
             }
         },
         "repoUrl": {
@@ -108,7 +102,7 @@
                         }
                     ]
                 },
-                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('appServicePlanResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlan'))]",
+                "serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId,'/resourcegroups/', parameters('appServicePlanResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlan'))]",
                 "reserved": false,
                 "isXenon": false,
                 "hyperV": false,

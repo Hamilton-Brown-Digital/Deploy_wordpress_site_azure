@@ -9,7 +9,11 @@ Use this template to deploy a copy of the WordPress files, hosted in a Six Degre
 Link: [Six Degrees Azure WordPress repo](https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL)
 
 ## Prerequisites
-- An existing Linux based App Service Plan ([template](https://github.com/sixdegreesazure/6dg-azure-deployment-standards/tree/master/azure-resources/app-service-plan/arm-templates/linux)).
+- An existing Linux based App Service Plan
+- An existing Azure Database for MySQL resource with SSL enforced and TLS 1.2 enabled
+- A schema already created with an associated MySQL username and password
+  
+<!-- - An existing Linux based App Service Plan ([template](https://github.com/sixdegreesazure/6dg-azure-deployment-standards/tree/master/azure-resources/app-service-plan/arm-templates/linux)).
 
 ### MySQL setup
 
@@ -34,7 +38,7 @@ USE `wordpress01`;
 GRANT ALL PRIVILEGES ON `wordpress01` . * TO 'db_user'@'%';
 
 FLUSH PRIVILEGES;
-```
+``` -->
 
 ## Deployment:
 
@@ -50,13 +54,7 @@ This will:
 
 
 <!-- 
-$url = "https://raw.githubusercontent.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/main/arm/template.json"
-[uri]::EscapeDataString($url)
 
-https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json 
-
-https://github.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/blob/main/https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json
-
-https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fmain%2Farm%2Ftemplate.json 
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-azure-button
 
 -->
