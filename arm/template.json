@@ -142,6 +142,7 @@
                 "netFrameworkVersion": "v4.0",
                 "phpVersion": "7.4",
                 "linuxFxVersion": "PHP|7.4",
+                "scmType": "ExternalGit",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
                 "alwaysOn": true,
@@ -209,7 +210,7 @@
 
                     "properties": {
                         "originHostHeader": "[reference(parameters('websiteName')).hostNames[0]]",
-                        "isHttpAllowed": true,
+                        "isHttpAllowed": false,
                         "isHttpsAllowed": true,
                         "queryStringCachingBehavior": "IgnoreQueryString",
                         "contentTypesToCompress": [
