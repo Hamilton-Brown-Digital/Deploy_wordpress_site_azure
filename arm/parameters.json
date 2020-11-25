@@ -2,29 +2,29 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "websitename": {
-            "value": "danmcloughlinwpdemo2020-02"
+        "websiteName": {
+            "value": "danmcloughlinwptest666"
         },
         "databaseName": {
-            "value": null
+            "value": "danmtest"
         },
         "databaseUser": {
-            "value": null
+            "value": "danmtest"
         },
         "databaseUserPassword": {
-            "value": null
+            "value": "M0rbious2020!"
         },
-        "mysqlHost": {
-            "value": null
+        "mySqlHost": {
+            "value": "danmcloughlin-mysqldbserver"
         },
         "appServicePlan": {
-            "value": null
+            "value": "ASP-WP-aa8a"
         },
         "appServicePlanResourceGroup": {
-            "value": null
+            "value": "WP"
         },
         "repoUrl": {
-            "value": "https://github.com/sixdegreesazure/Deploy-WordPress-On-Azure-Web-App-Public/tree/main/wordpress"
+            "value": "https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL"
         },
         "branch": {
             "value": "main"
