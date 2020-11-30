@@ -1,44 +1,19 @@
 # Deploy a WordPress Web App
 
-**WARNING - THIS IS A PUBLIC FACING REPOSITORY**
-
 ## Overview
 
-Use this template to deploy a copy of the WordPress files, hosted in a Six Degrees public facing GitHub repo to a new Azure Web App.
+Deploy a customised version of WordPress designed to work run in an Azure Web App and link to an Azure Database for MySQL resource with SSL enforced and TLS 1.2 enabled.
+
+**Please check certificate expiry before deployment.**
 
 Link: [Six Degrees Azure WordPress repo](https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL)
+
+Certificate source: [Baltimore CyberTrust Root](https://www.digicert.com/kb/digicert-root-certificates.htm)
 
 ## Prerequisites
 - An existing Linux based App Service Plan
 - An existing Azure Database for MySQL resource with SSL enforced and TLS 1.2 enabled
-- A schema already created with an associated MySQL username and password
-  
-<!-- - An existing Linux based App Service Plan ([template](https://github.com/sixdegreesazure/6dg-azure-deployment-standards/tree/master/azure-resources/app-service-plan/arm-templates/linux)).
-
-### MySQL setup
-
-- An existing Azure MySQL instance ([template](https://github.com/sixdegreesazure/6dg-azure-deployment-standards/tree/master/azure-resources/mysql)).
-
-- TLS 1.2 and SSL enforcement enabled on the MySQL server ([Download the 'Baltimore CyberTrust Root' PEM from here](https://www.digicert.com/kb/digicert-root-certificates.htm)). You will need this to connect to the database remotely.
-
-- MySQL Workbench - required to get remote access to the MySQL server. [Download from here](https://dev.mysql.com/downloads/workbench/). You set the root credentials during deployment and can get the hostname and port etc via the Azure portal. Setup MySQL Workbench as per the below:
-
-[![Click to view](./_images/workbench01.png)](./_images/workbench01.png)<br />
-[![Click to view](./_images/workbench02.png)](./_images/workbench02.png)<br />
-
-- Run the below SQL (in Workbench) to create a new database, database user and password for a new WordPress install:
-
-```
-CREATE SCHEMA `wordpress01` DEFAULT CHARACTER SET utf8 ;
-
-CREATE USER 'wordpress01user'@'%' IDENTIFIED BY 'StrongPassword!';
-
-USE `wordpress01`;
-
-GRANT ALL PRIVILEGES ON `wordpress01` . * TO 'db_user'@'%';
-
-FLUSH PRIVILEGES;
-``` -->
+- A schema already created with an associated user and password
 
 ## Deployment:
 
