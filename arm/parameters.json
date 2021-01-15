@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "websiteName": {
-            "value": "hamiltonbrownpoc01"
+            "value": "hbpoc001"
         },
         "databaseName": {
             "value": "db-uks-poc02"
@@ -30,8 +30,7 @@
             "value": "main"
         },
         "cdnProfile": {
-            "value": "hamiltonbrownpoc01"
-        }
+            "value": "cdn-hbpoc001"
         },
         "cdnEndpoint": {
             "value": "danmacCDN01"
