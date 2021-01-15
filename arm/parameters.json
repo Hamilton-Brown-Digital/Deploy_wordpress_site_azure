@@ -3,30 +3,33 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "websiteName": {
-            "value": "danmcloughlinwptest666"
+            "value": "hamiltonbrownpoc02"
         },
         "databaseName": {
-            "value": "danmtest"
+            "value": "db-uks-poc02"
         },
         "databaseUser": {
-            "value": "danmtest"
+            "value": "db-uks-poc02-user"
         },
         "databaseUserPassword": {
-            "value": "M0rbious2020!"
+            "value": "StrongP@ssword!"
         },
         "mySqlHost": {
-            "value": "danmcloughlin-mysqldbserver"
+            "value": "mss-uks-hamiltonbrown.mysql.database.azure.com"
         },
         "appServicePlan": {
-            "value": "ASP-WP-aa8a"
+            "value": "asp-uks-HamiltonBrown"
         },
         "appServicePlanResourceGroup": {
-            "value": "WP"
+            "value": "rg-uks-sharedservices"
         },
         "repoUrl": {
             "value": "https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL"
         },
         "branch": {
+            "value": "main"
+        },
+        "cdnEndpoint": {
             "value": "main"
         }
     }

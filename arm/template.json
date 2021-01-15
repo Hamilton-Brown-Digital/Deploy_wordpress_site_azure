@@ -57,13 +57,18 @@
                 "description": "The GitHub branch for the above repo"
             },
             "defaultValue": "main"
+        },
+        "cdnEndpoint": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter an existing CDN profile name, or enter new name to create a new profile"
+            }
         }
     },
     "variables": {
         "websiteNameClean": "[replace(parameters('websiteName'),'-', '')]",
         "mySqlHostClean": "[replace(parameters('mySqlHost'),'.mysql.database.azure.com', '')]",
-        "endpointName": "[concat('cdn-endpoint-', variables('websiteNameClean'))]",
-        "profileName": "[concat('cdn-profile-', variables('websiteNameClean'))]"
+        "cdnProfile": "[concat('cdn-profile-', variables('websiteNameClean'))]"
     },
     "resources": [
         {
@@ -188,12 +193,12 @@
             }
         },
         {
-            "name": "[variables('profileName')]",
+            "name": "[variables('cdnProfile')]",
             "type": "Microsoft.Cdn/profiles",
             "location": "global",
             "apiVersion": "2020-04-15",
             "tags": {
-                "displayName": "[variables('profileName')]"
+                "displayName": "[variables('cdnProfile')]"
             },
             "sku": {
                 "name": "Standard_Akamai"
@@ -201,12 +206,12 @@
             "properties": {},
             "resources": [
                 {
-                    "name": "[variables('endpointName')]",
+                    "name": "[parameters('cdnEndpoint')]",
                     "type": "endpoints",
                     "location": "global",
                     "apiVersion": "2020-04-15",
                     "dependsOn": [
-                        "[variables('profileName')]",
+                        "[variables('cdnProfile')]",
                         "[variables('websiteNameClean')]"
                     ],
 
@@ -249,7 +254,7 @@
         },
         "CDN Profile Name": {
             "type": "string",
-            "value": "[reference(variables('endpointName')).hostName]"
+            "value": "[reference(parameters('cdnEndpoint')).hostName]"
         }
     }
 }
