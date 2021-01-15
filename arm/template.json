@@ -149,7 +149,7 @@
                 "netFrameworkVersion": "v4.0",
                 "phpVersion": "7.4",
                 "linuxFxVersion": "PHP|7.4",
-                "scmType": "ExternalGit",
+                "scmType": "GitHub",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
                 "alwaysOn": true,
