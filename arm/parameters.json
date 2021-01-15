@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "websiteName": {
-            "value": "hamiltonbrownpoc02"
+            "value": "hamiltonbrownpoc01"
         },
         "databaseName": {
             "value": "db-uks-poc02"
@@ -18,10 +18,10 @@
             "value": "mss-uks-hamiltonbrown.mysql.database.azure.com"
         },
         "appServicePlan": {
-            "value": "asp-uks-HamiltonBrown"
+            "value": "hbpoc2021"
         },
         "appServicePlanResourceGroup": {
-            "value": "rg-uks-sharedservices"
+            "value": "CDN"
         },
         "repoUrl": {
             "value": "https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL"
@@ -29,8 +29,12 @@
         "branch": {
             "value": "main"
         },
+        "cdnProfile": {
+            "value": "hamiltonbrownpoc01"
+        }
+        },
         "cdnEndpoint": {
-            "value": "main"
+            "value": "danmacCDN01"
         }
     }
 }

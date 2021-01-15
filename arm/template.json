@@ -58,17 +58,22 @@
             },
             "defaultValue": "main"
         },
-        "cdnEndpoint": {
+        "cdnProfile": {
             "type": "string",
             "metadata": {
                 "description": "Enter an existing CDN profile name, or enter new name to create a new profile"
+            }
+        },
+        "cdnEndpoint": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter a CDN endpoint for this new website. A CDN endpoint is linked to a CDN profile"
             }
         }
     },
     "variables": {
         "websiteNameClean": "[replace(parameters('websiteName'),'-', '')]",
-        "mySqlHostClean": "[replace(parameters('mySqlHost'),'.mysql.database.azure.com', '')]",
-        "cdnProfile": "[concat('cdn-profile-', variables('websiteNameClean'))]"
+        "mySqlHostClean": "[replace(parameters('mySqlHost'),'.mysql.database.azure.com', '')]"
     },
     "resources": [
         {
@@ -193,12 +198,12 @@
             }
         },
         {
-            "name": "[variables('cdnProfile')]",
+            "name": "[parameters('cdnProfile')]",
             "type": "Microsoft.Cdn/profiles",
             "location": "global",
             "apiVersion": "2020-04-15",
             "tags": {
-                "displayName": "[variables('cdnProfile')]"
+                "displayName": "[parameters('cdnProfile')]"
             },
             "sku": {
                 "name": "Standard_Akamai"
@@ -211,7 +216,7 @@
                     "location": "global",
                     "apiVersion": "2020-04-15",
                     "dependsOn": [
-                        "[variables('cdnProfile')]",
+                        "[parameters('cdnProfile')]",
                         "[variables('websiteNameClean')]"
                     ],
 
