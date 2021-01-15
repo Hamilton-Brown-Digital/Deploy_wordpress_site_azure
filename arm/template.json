@@ -67,7 +67,7 @@
         "cdnEndpoint": {
             "type": "string",
             "metadata": {
-                "description": "Enter a CDN endpoint for this new website. A CDN endpoint is linked to a CDN profile"
+                "description": "Cannot be the same name as 'websiteName'. Enter a CDN endpoint for this new website. A CDN endpoint is linked to a CDN profile."
             }
         }
     },
