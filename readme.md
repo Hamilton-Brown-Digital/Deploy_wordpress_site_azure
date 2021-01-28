@@ -6,7 +6,7 @@ Deploy a customised version of WordPress designed to work run in an Azure Web Ap
 
 **Please check certificate expiry before deployment.**
 
-Link: [Six Degrees Azure WordPress repo](https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL)
+Link: [Azure WordPress repo](https://github.com/Hamilton-Brown-Digital/WordPress-On-Azure-Web-App-MySQL-TLS-SSL)
 
 Certificate source: [Baltimore CyberTrust Root](https://www.digicert.com/kb/digicert-root-certificates.htm)
 
@@ -22,7 +22,7 @@ Click the button below to deploy a new WordPress instance.
 This will:
 - Create a new Azure Web App, linking it to the existing App Service Plan. The database details will be set as Application Settings. The code will be pulled from the [Six Degrees Azure WordPress repo](https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL).
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsixdegreesazure%2FDeploy-WordPress-On-Azure-Web-App-Public%2Fcdn%2Farm%2Ftemplate.json " target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FHamilton-Brown-Digital%2FDeploy_wordpress_site_azure%2Fmain%2Farm%2Ftemplate.json" target="_blank">
   <img src="https://aka.ms/deploytoazurebutton"/>
 </a>
 
