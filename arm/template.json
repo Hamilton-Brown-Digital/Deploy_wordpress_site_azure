@@ -49,7 +49,7 @@
             "metadata": {
                 "description": "The GitHub repository name of the codebase to install onto the Web App"
             },
-            "defaultValue": "https://github.com/sixdegreesazure/WordPress-On-Azure-Web-App-MySQL-TLS-SSL"
+            "defaultValue": "https://github.com/Hamilton-Brown-Digital/WordPress-On-Azure-Web-App-MySQL-TLS-SSL"
         },
         "branch": {
             "type": "string",
